@@ -1,10 +1,9 @@
-package tragaperras;
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -14,7 +13,7 @@ public class Marco extends JFrame
     private javax.swing.JButton Button1;
     private javax.swing.JButton Button2;
     private javax.swing.JButton Button3;
-    private javax.swing.JButton Image3;
+    private javax.swing.JButton Imagen3;
     private javax.swing.JButton Imagen;
     private javax.swing.JButton Imagen2;
     private javax.swing.JButton Inicio;
@@ -41,8 +40,8 @@ public class Marco extends JFrame
         this.Imagen2.setIcon(iconoEscalado);
         
         ImageIcon icono3= new ImageIcon(".\\imagenes\\numero5.png");
-        ImageIcon iconoEscalado3 = new ImageIcon (icono.getImage().getScaledInstance(this.Image3.getWidth(), this.Image3.getHeight(), 0));
-        this.Image3.setIcon(iconoEscalado);
+        ImageIcon iconoEscalado3 = new ImageIcon (icono.getImage().getScaledInstance(this.Imagen3.getWidth(), this.Imagen3.getHeight(), 0));
+        this.Imagen3.setIcon(iconoEscalado);
     }
     
     
@@ -57,7 +56,7 @@ public class Marco extends JFrame
         Button3 = new javax.swing.JButton();
         Imagen = new javax.swing.JButton();
         Imagen2 = new javax.swing.JButton();
-        Image3 = new javax.swing.JButton();
+        Imagen3 = new javax.swing.JButton();
         Inicio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,7 +95,7 @@ public class Marco extends JFrame
             }
         });
 
-        Image3.addActionListener(new java.awt.event.ActionListener() {
+        Imagen3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Image3ActionPerformed(evt);
             }
@@ -106,6 +105,7 @@ public class Marco extends JFrame
         Inicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 InicioActionPerformed(evt);
+                
             }
         });
 
@@ -126,7 +126,7 @@ public class Marco extends JFrame
                             .addComponent(Imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Image3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Button3, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
@@ -141,7 +141,7 @@ public class Marco extends JFrame
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(Imagen2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Image3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Imagen3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(Imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -158,23 +158,26 @@ public class Marco extends JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImagenActionPerformed
+    	h1.activo = false;
+    	bingo();
+    }
+    
     private void Imagen2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Imagen2ActionPerformed
     	h2.activo = false;
+    	bingo();
     }
 
     private void Image3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Image3ActionPerformed
     	h3.activo = false;
-    }
-
-    private void ImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImagenActionPerformed
-    	h1.activo = false;
+    	bingo();
     }
 
     private void InicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioActionPerformed
     	
     	h1 = new Hilo(Imagen,Button1);
         h2 = new Hilo(Imagen2,Button2);
-        h3 = new Hilo(Image3,Button3);
+        h3 = new Hilo(Imagen3,Button3);
         
         h1.start();
         h2.start();
@@ -185,17 +188,28 @@ public class Marco extends JFrame
 
     private void Button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button1ActionPerformed
     	h1.activo = false;
+    	bingo();
+
     }
 
     private void Button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button2ActionPerformed
     	h2.activo = false;
+    	bingo();
+    	
     }
 
     private void Button3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button3ActionPerformed
     	h3.activo = false;
+    	bingo();
     }
 
-    
+    private void bingo() {
+    	if (!h1.isAlive() && !h2.isAlive() && !h3.isAlive()) {
+    		if(h1.getNumero() == h2.getNumero() && h3.getNumero() == h2.getNumero()) {
+    			JOptionPane.showConfirmDialog(null, "Ganaste");
+    		}
+    	}
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
